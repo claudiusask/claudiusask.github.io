@@ -17,51 +17,52 @@
 		<div class="container">
     		<div class="blurb">
         		<h1>Installing Suse Enterprise 15_SP1 TRIAL</h1>
-                <p><b><i>These were the actual processes I went through</i></b><br>
-                    <br>
-                    <br>
+                <p><b><i>These were the actual processes I went through</i></b><br><br><br><br>
+                    <br><br>
+                    <br><br>
 
-                    1. Start the installation with new VM with 90-GB Hard disk for Main OS <i>(SUSE Enterprise Linux 15 SP1)</i> and HANA express. 16-GB ram. If 16 or less than 16-GB we need to add 20GB of <b>/SWAP</b>.<br>
+                    <b>1.</b> Start the installation with new VM with 90-GB Hard disk for Main OS <i>(SUSE Enterprise Linux 15 SP1)</i> and HANA express. 16-GB ram. If 16 or less than 16-GB we need to add 20GB of <b>/SWAP</b>.<br><br>
                 
-                    2. Go to <link rel="stylesheet" href="suse.com"> and register for 60 days trial and get the KEY or skipping for later registration in yast. We need this for latest updates.<br>
+                    <b>2.</b> Go to <link rel="stylesheet" href="suse.com"> and register for 60 days trial and get the KEY or skipping for later registration in yast. We need this for latest updates.<br><br>
                     
-                    3. Download <b>GM1.DVD for SUSE for SAP 15 SP1.</b> and boot into the installer and select INSTALL. <i>(with f3 you change the display mode because for me the screen was way too small to read and interact)</i><br>
+                    <b>3.</b> Download <b>GM1.DVD for SUSE for SAP 15 SP1.</b> and boot into the installer and select INSTALL. <i>(with f3 you change the display mode because for me the screen was way too small to read and interact)</i><br><br>
                     
-                    4. Setup the Network as required by clicking the Network Config on the top right side. I have setup the static ip <b>172.16.0.20/24</b> iPV4 with <b>172.16.0.254</b> as a default gateway and hostname to <i>susehana.example.local</i><br>
+                    <b>4.</b> Setup the Network as required by clicking the Network Config on the top right side. I have setup the static ip <b>172.16.0.20/24</b> iPV4 with <b>172.16.0.254</b> as a default gateway and hostname to <i>susehana.example.local</i><br><br>
                     
-                    5. If we selected SAP installation at the start and registered in the previous step it will fetch the modules online. <br>
+                    <b>5</b> If we selected SAP installation at the start and registered in the previous step it will fetch the modules online. <br><br>
                     
-                    6. In the next step we can use the guided or we can go with Expert mode, which I did.<br>
+                    <b>6.</b> In the next step we can use the guided or we can go with Expert mode, which I did.<br><br>
                     
-                    7. Use LVM for all except BIOS BOOT.<br>
-                        a. Create a new vghana of 90 GB<br>
-                        b. Create lvmain 500 MB<br>
-                        c. Create lvboot 69.50 GB<br>
-                        d. Create lvswap 20 GB<br>
+                    <b>7.</b> Use LVM for all except BIOS BOOT.<br><br>
+                        <b>a.</b> Create a new vghana of 90 GB<br><br>
+                        <b>b.</b> Create lvmain 500 MB<br><br>
+                        <b>c.</b> Create lvboot 69.50 GB<br><br>
+                        <b>d.</b> Create lvswap 20 GB<br><br>
                     
-                    8. Use 4Mib for BIOS boot <i>(already selected)</i><br>
+                    <b>8.</b> Use 4Mib for BIOS boot <i>(already selected)</i><br><br>
                     
-                    9. Create new partitions as following:-<br>
-                        a. 500 MiB for / <br>
-                        b. 69.50 GiB for /boot<br>
-                        c. 20 GiB for /SWAP<br>
+                    <b>9.</b> Create new partitions as following:-<br><br>
+                        <b>a.</b> 500 MiB for / <br><br>
+                        <b>b.</b> 69.50 GiB for /boot<br><br>
+                        <b>c.</b> 20 GiB for /SWAP<br><br>
                     
-                    10. Now in the next window we need to add the root password <i>( we will create a separate user "sapadm" as a local sudo admin later )</i><br>
+                    <b>10.</b> Now in the next window we need to add the root password <i>( we will create a separate user "sapadm" as a local sudo admin later )</i><br><br>
                     
-                    11. Install with GUI or TEXT-mode <i>(which I prefer)</i><br>
+                    <b>11.</b> Install with GUI or TEXT-mode <i>(which I prefer)</i><br><br>
                     
-                    12. Change the SSH from closed to open <i>( so we can use ssh later )</i><br>
+                    <b>12.</b> Change the SSH from closed to open <i>( so we can use ssh later )</i><br><br>
                     
-                    13. Kdump is enabled<br>
+                    <b>13.</b> Kdump is enabled<br><br>
                     
-                    14. Now let it install and wait for few minutes.<br>
+                    <b>14.</b> Now let it install and wait for few minutes.<br><br>
                     
-                    15. Now log into new system and add a user "sapadm" for SAP Administration and general OS administration. Add "sapadm" into visudo file under the root ALL=<i>(ALL:ALL)</i> ALL, with same options as root.<br>
+                    <b>15.</b> Now log into new system and add a user "sapadm" for SAP Administration and general OS administration. Add "sapadm" into visudo file under the root ALL=<i>(ALL:ALL)</i> ALL, with same options as root.<br><br>
                     
-                    16. OPTIONAL - SSH - KEY you can do this optionally<br>
-                        a. Change to user "sapadm" and mkdir .ssh and chmod 0700<br>
-                        b. Create new authorized_keys file via vim chmod it 0644 and add your host id_rsa.pub which is public ssh keys so you can use Putty or WSL2 Ubuntu instance to connect <i>( I used WSL2-Ubuntu on Windows Terminal - I like the fonts and overall aesthetics of this terminal  but you can use whatever you like)</i><br>
-                    Don’t forget to restart ssh with systemctl restart sshd</a></p><br>
+                    <b>16.</b> OPTIONAL - SSH - KEY you can do this optionally<br><br>
+                        <b>a.</b> Change to user "sapadm" and mkdir .ssh and chmod 0700<br><br>
+                        <b>b.</b> Create new authorized_keys file via vim chmod it 0644 and add your host id_rsa.pub which is public ssh keys so you can use Putty or WSL2 Ubuntu instance to connect <i>( I used WSL2-Ubuntu on Windows Terminal - I like the fonts and overall aesthetics of this terminal  but you can use whatever you like)</i><br><br>
+                    <br><br>
+                    Don’t forget to restart ssh with systemctl restart sshd</a></p><br><br>
     		</div><!-- /.blurb -->
 		</div><!-- /.container -->
 		<footer>
