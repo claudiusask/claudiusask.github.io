@@ -2,6 +2,49 @@
 <html>
 <body>
 <h1>ClaudiusAsk</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<h2>Installing Suse Enterprise 15_SP1 TRIAL</h2>
+<p>These were the actual processes I went through
+
+    1. Start the installation with new VM with 90-GB Hard disk for Main OS <i>(SUSE Enterprise Linux 15 SP1)</i> and HANA express. 16-GB ram. If 16 or less than 16-GB we need to add 20GB of <b>/SWAP</b>.
+
+    2. Go to <link rel="stylesheet" href="suse.com"> and register for 60 days trial and get the KEY or skipping for later registration in yast. We need this for latest updates.
+    
+	3. Download <b>GM1.DVD for SUSE for SAP 15 SP1.</b> and boot into the installer and select INSTALL. <i>(with f3 you change the display mode because for me the screen was way too small to read and interact)</i>
+    
+    4. Setup the Network as required by clicking the Network Config on the top right side. I have setup the static ip <b>172.16.0.20/24</b> iPV4 with <b>172.16.0.254</b> as a default gateway and hostname to <i>susehana.example.local</i>
+    
+    5. If we selected SAP installation at the start and registered in the previous step it will fetch the modules online. 
+    
+    6. In the next step we can use the guided or we can go with Expert mode, which I did.
+    
+    7. Use LVM for all except BIOS BOOT.
+		a. Create a new vghana of 90 GB
+		b. Create lvmain 500 MB
+		c. Create lvboot 69.50 GB
+		d. Create lvswap 20 GB
+    
+    8. Use 4Mib for BIOS boot <i>(already selected)</i>
+    
+    9. Create new partitions as following:-
+		a. 500 MiB for / 
+		b. 69.50 GiB for /boot
+		c. 20 GiB for /SWAP
+    
+    10. Now in the next window we need to add the root password <i><i>( we will create a separate user "sapadm" as a local sudo admin later)</i>
+    
+    11. Install with GUI or TEXT-mode <i>(which I prefer)</i>
+    
+    12. Change the SSH from closed to open <i>( so we can use ssh later )</i>
+    
+    13. Kdump is enabled
+    
+    14. Now let it install and wait for few minutes.
+    
+    15. Now log into new system and add a user "sapadm" for SAP Administration and general OS administration. Add "sapadm" into visudo file under the root ALL=<i>(ALL:ALL)</i> ALL, with same options as root.
+    
+    16. OPTIONAL - SSH - KEY you can do this optionally
+		a. Change to user "sapadm" and mkdir .ssh and chmod 0700
+		b. Create new authorized_keys file via vim chmod it 0644 and add your host id_rsa.pub which is public ssh keys so you can use Putty or WSL2 Ubuntu instance to connect <i>( I used WSL2-Ubuntu on Windows Terminal - I like the fonts and overall aesthetics of this terminal  but you can use whatever you like)</i>
+    Don’t forget to restart ssh with systemctl restart sshd</p>
 </body>
 </html>
